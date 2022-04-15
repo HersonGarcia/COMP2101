@@ -81,4 +81,16 @@ size1
 }
 get-mydisks
 
+# Lab 3 Powershell Data
+#run command: myipconf
+
+get-ciminstance win32_networkadapterconfiguration -filter ipenabled=true | 
+Select-object description, 
+              index, 
+              ipaddress,
+              @{n="submask";e={$_.ipsubnet}},
+              dnsdomain,
+              servicename |
+format-table
+
 
