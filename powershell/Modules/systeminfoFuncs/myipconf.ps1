@@ -1,5 +1,6 @@
 #Lab 3 Powershell Data
 
+function myipconf {
 get-ciminstance win32_networkadapterconfiguration -filter ipenabled=true | 
 Select-object Description, 
               Index, 
@@ -8,3 +9,4 @@ Select-object Description,
               dnsdomain,
               Servicename |
 format-table
+}
