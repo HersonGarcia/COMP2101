@@ -108,8 +108,16 @@ $phymemory
                                  
 ## LAB 3 REPORT ##
 "Network Adapter Configuration:"
-myipconf                                                                            
-                    
+function myipconf {
+get-ciminstance win32_networkadapterconfiguration -filter ipenabled=true | 
+Select-object Description, 
+              Index, 
+              Ipaddress,
+              @{n="Submask";e={$_.ipsubnet}},
+              Servicename |
+format-table
+}                                                                          
+myipconf                   
                                                                                          
 ## VIDEO CARD INFO ##
 function videocard {

@@ -1,3 +1,11 @@
+System Hardware: systemhardware
+Operating System : operatingsystem
+Processor Info : processor 
+Physical Memory : physicalmemory
+Disk Drives: diskinfo
+Network Adapter: myipconf 
+Video Card: videocard
+
 function systemhardware {
 "System Hardware:"
 $syshardware = gwmi -class win32_computersystem |
@@ -13,7 +21,8 @@ $syshardware = gwmi -class win32_computersystem |
     $syshardware
     }
 
-    function operatingsystem {
+
+function operatingsystem {
 "Operating System Info:"
 $operatingsys = gwmi -class win32_operatingsystem |
    foreach {
