@@ -26,6 +26,7 @@ $operatingsys = gwmi -class win32_operatingsystem |
   $operatingsys 
                     "__________________________________________"
 ##PROCESSOR INFO##
+Function processor {
 "Processor Info:"
 $processor = gwmi -class win32_processor |
     foreach {                                         
@@ -38,8 +39,10 @@ $processor = gwmi -class win32_processor |
         }
     } 
 $processor
+}
                     "__________________________________________"
 ##PHYSICAL MEMORY
+function physmem {
 "Physical Memory Info:"
 $totalcapacity = 0 
 $phymemory = gwmi -class win32_physicalmemory |                                    
@@ -61,8 +64,10 @@ $phymemory = gwmi -class win32_physicalmemory |
                        Bank,                   
                        Slot
 $phymemory 
+}
                     "__________________________________________"
 ##DISK DRIVES INFORMATION## 
+ function diskinfo {
  "Disk Drive Info:"
  $diskdrives = Get-CimInstance cim_diskdrive
  $2logicaldisks = Get-CimInstance CIM_logicaldisk
@@ -91,7 +96,7 @@ $phymemory
                                                 }
                                         }
                                  } 
-                                      
+                      }                
 
 
 
