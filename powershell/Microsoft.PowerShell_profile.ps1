@@ -93,12 +93,10 @@ Select-object description,
               servicename |
 format-table
 
-#Lab 4 
+#Lab 4 - Loops WMI/CIM
 
-#Run command: Lab04
-
-                    "__________________________________________"
 ##SYSTEM HARDWARE INFO##
+function systemhardware {
 "System Hardware:"
 $syshardware = gwmi -class win32_computersystem |
    foreach {                                
@@ -111,8 +109,11 @@ $syshardware = gwmi -class win32_computersystem |
     }   |
     format-list
     $syshardware
-                    "__________________________________________"
-##OPERATING SYSTEM INFO
+    }
+    systemhardware
+                        
+##OPERATING SYSTEM INFO##
+function operatingsystem {
 "Operating System Info:"
 $operatingsys = gwmi -class win32_operatingsystem |
    foreach {
@@ -123,8 +124,11 @@ $operatingsys = gwmi -class win32_operatingsystem |
   }     | 
   format-list     
   $operatingsys 
-                    "__________________________________________"
+  }
+  operatingsystem
+                  
 ##PROCESSOR INFO##
+Function processor {
 "Processor Info:"
 $processor = gwmi -class win32_processor |
     foreach {                                         
@@ -137,8 +141,11 @@ $processor = gwmi -class win32_processor |
         }
     } 
 $processor
-                    "__________________________________________"
-##PHYSICAL MEMORY
+    }
+    processor 
+            
+## PHYSICAL MEMORY ##
+function physicalmemory {
 "Physical Memory Info:"
 $totalcapacity = 0 
 $phymemory = gwmi -class win32_physicalmemory |                                    
@@ -160,8 +167,11 @@ $phymemory = gwmi -class win32_physicalmemory |
                        Bank,                   
                        Slot
 $phymemory 
-                    "__________________________________________"
-##DISK DRIVES INFORMATION## 
+    }
+    physicalmemory
+                                        
+## DISK DRIVES INFORMATION ## 
+ function diskinfo {
  "Disk Drive Info:"
  $diskdrives = Get-CimInstance cim_diskdrive
  $2logicaldisks = Get-CimInstance CIM_logicaldisk
@@ -190,19 +200,17 @@ $phymemory
                                                 }
                                         }
                                  } 
-                                      
-
-
-
-                    "__________________________________________"                                  
+                      }                
+                      diskinfo
+                                 
 ## LAB 3 REPORT ##
 "Network Adapter Configuration:"
 myipconf                                                                            
                     
-                    "__________________________________________"                                                                     
+                                                                                         
 ## VIDEO CARD INFO ##
+function videocard {
 "Video Card Info:"
-
 $videocard = gwmi -class win32_videocontroller |                        
      foreach {                                         
     new-object -Typename psobject -Property @{Vendor = $_.VideoProcessor
@@ -215,5 +223,16 @@ $videocard = gwmi -class win32_videocontroller |
              } 
              
 $videocard
+}
+videocard
+
+#functions
+systemhardware
+
+
+
+
+
+
 
 
